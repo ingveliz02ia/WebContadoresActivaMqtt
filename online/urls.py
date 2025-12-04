@@ -11,7 +11,7 @@ urlpatterns = [
     path('inicioT/',inicio, name='iniciox'),
     #Aqui llamo a view llamada consulta y este view llamara a la pagina html
     path('consultaT/',consulta, name='consultax'), 
-     path('consulta_chipT/',consulta_chip, name='consultax'), 
+    path('consulta_chipT/',consulta_chip, name='consulta_chipx'), 
     path('graficoT/',grafico, name='graficox'), 
     path('registerT/', register, name='registerx'), 
     path('ingresarT/',LoginView.as_view(template_name = 'ingresar.html' ), name='ingresarx'),
