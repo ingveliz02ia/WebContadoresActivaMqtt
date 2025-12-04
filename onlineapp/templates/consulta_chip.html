@@ -31,7 +31,7 @@
       
       <div class=card-body>
       
-        <form name="input_form" action = "http://localhost:8000/consultaT/"  method="get">
+        <form name="input_form" action = "{% url 'consultax' %}"  method="get">
           <input list="cod_chips" name ="codchip_extraido" id ="codchip_extraidox" placeholder ="Lista de Codigos" /> 
             <datalist id ="cod_chips"> 
                 {% for rx in cod_chipxs %}
