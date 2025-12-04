@@ -1,0 +1,35 @@
+
+{% extends 'layout.html' %}
+
+{% block titulo %} ingresar {% endblock %}
+
+{% load static %}
+
+{% block contenido %} 
+    {% load static %}
+    <div class="alert - success">
+        <strong>Bienvenido. </strong> Ingresa al Sistema.
+    </div>
+        
+    <div class="login-page" >
+    <!-- Mensages-->   
+        {% if messages %}
+            {% for message in messages %}
+                <div class="notification {{ message.tags}}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    <!--  Fin de Mensajes -->
+        <div class="form">
+            <form class="login-form"  method="POST">
+                {% csrf_token %} 
+                {{form.as_p}}
+                <button type="submit"> Ingresar </button> 
+                <p class="message">¿Si no estas registrado? <a href= "/registerT" >Registrate</a></p>
+                
+            </form>
+        </div>
+        
+    </div> 
+{% endblock %}

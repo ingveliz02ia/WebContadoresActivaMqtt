@@ -1,0 +1,277 @@
+
+{% extends 'layout.html' %}
+
+{% block titulo %} consulta {% endblock %}
+
+{% load static %}
+
+
+{% block Parte_cabecera %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" href="{% static 'css/grafico.css' %}"/> 
+{% endblock %}
+
+{% block contenido %} 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" >
+        <img src="{% static 'images/gva.jpg' %}" width="90" height="90" class="d-inline-block align-top" alt="">    
+    </a>
+               
+  <div class=row>   
+      <div class=card-body>
+        <h7 class ="text- light"> WEB GVA Technology SAC </h7>
+      </div>
+
+      <div class=card-body>
+        <h3 class ="text- light"  > USUARIO {{ user.username | upper}}  </h3>
+      </div>
+      
+      <div class=card-body>
+          <form name="input_form" action=" "  method="POST">
+            <input type="number" name="Nro_de_datos" id="Nro_de_datosx" value = ""  style="width:80px;height:20px" >  {% csrf_token %} <br> 
+          </form>
+      </div>
+      <!--Se Uso este parametro para activar sin resetear la pagina-->
+      <div class=card-body>
+        <a class ="btn btn-danger float-right" onclick ='Activar_script()' role="button" aria pressed ="true"  style="width:80px;height:40px"> Activar </a>
+      </div> 
+
+      <div class=card-body>
+        <a class ="btn btn-danger float-right" onclick ='Desactivar_script()' role="button" aria pressed ="true"  style="width:100px;height:40px"> Desactivar </a>
+      </div>  
+
+      <div class=card-body>
+        <a class ="btn btn-danger float-right" href='/consulta_chipT/' role="button" aria pressed ="true"  style="width:100px;height:40px"> Regresar </a>
+      </div>  
+
+      <div class=card-body>
+        <a href="{% url 'logoutx' %}" class ="btn btn-danger float-right" role="button" aria pressed="true" style="width:80px;height:40px">Salir</a>
+      </div> 
+      <!--
+      <div class=card-body>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="notification {{ message.tags}}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %} 
+        </div> 
+        -->
+
+    
+  </div>  
+
+ </nav> 
+ 
+
+  <div class="container-fluid"> 
+
+      <div class ="row"> 
+              <div class ="col-md-auto">
+                <div class = "table-responsive">
+                      <table class = "table table-striped">
+                          <thead>
+                              <tr>
+                                  <th style="text-align:center">Id</th>                                
+                                  <th style="text-align:center">Cod.Chip</th>
+                                  <th style="text-align:center">Cont. IN_01</th> 
+                                  <th style="text-align:center">Cont. IN_02</th>                                   
+                                  <th style="text-align:center">Cont. OUT_01</th>
+                                  <th style="text-align:center">Cont. OUT_02</th>
+                                  <th style="text-align:center">Local</th>
+                                  <th style="text-align:center">Ubicacion</th>
+                                  <th style="text-align:center">Relay</th>
+                                  <th style="text-align:center">Evento</th>
+                                  <th style="text-align:center">Fecha</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for item in consultas %}                                  
+                                  <tr>
+                                    {% for i in item %}  
+                                    <td>
+                                      {{i}}
+                                    </td>
+                                    {% endfor %}                       
+                                  </tr>
+                              {% endfor   %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class=" container">
+                  <div class=" container">
+                    <figure class="highcharts-figure">
+                      <div id="containerx"></div>
+                      <p class="highcharts-description">
+                      <!--Grafico de Contadores de Entrada,se observa ultimos datos-->
+                      </p>
+                    </figure>
+                  </div>   
+              
+                  <div class=" container">
+                    <figure class="highcharts-figure">
+                      <div id="containery"></div>
+                      <p class="highcharts-description">
+                      <!--Grafico de Contadores de Entrada,se observa ultimos datos-->
+                      </p>
+                    </figure>
+                  </div>   
+              </div>
+             <script type="application/javascript">
+                Highcharts.chart('containerx', {
+
+                  title: {
+                    text: 'CONTADORES DE ENTRADA'
+                  },
+                
+                  yAxis: {
+                    title: {
+                      text: 'valores'
+                    }
+                  },
+                
+                  xAxis: {
+                    title: {
+                      text: 'Data'
+                    }, 
+                    categories:{{id|safe}}
+                  },
+                
+                  legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                  },
+                
+                  plotOptions: {
+                    series: {
+                      label: {
+                        connectorAllowed: true
+                      },
+                      pointStart: 1
+                    }
+                  },
+                
+                  series: [{
+                    name: 'Contador IN 01',
+                    data: {{tempA|safe}}
+                  }, {
+                    name: 'Contador IN 02',
+                    data: {{tempO|safe}}
+                  }],
+                
+                  responsive: {
+                    rules: [{
+                      condition: {
+                        maxWidth: 500
+                      },
+                      chartOptions: {
+                        legend: {
+                          layout: 'horizontal',
+                          align: 'center',
+                          verticalAlign: 'bottom'
+                        }
+                      }
+                    }]
+                  }
+                
+                });
+          </script>  
+          <script type="application/javascript">
+            Highcharts.chart('containery', {
+            
+              title: {
+                text: 'CONTADORES DE SALIDA'
+              },
+            
+              yAxis: {
+                title: {
+                  text: 'Valores'
+                }
+              },
+            
+              xAxis: {
+                title: {
+                  text: 'Data'
+                },
+                categories:{{id|safe}} 
+              },
+            
+              legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+              },
+            
+              plotOptions: {
+                series: {
+                  label: {
+                    connectorAllowed: true
+                  },
+                  pointStart: 1
+                }
+              },
+            
+              series: [{
+                  name: 'Contador OUT 01',
+                  data: {{con_in|safe}}
+                },{
+                  name: 'Contador OUT 02',
+                  data: {{con_out|safe}}
+                }],
+            
+              responsive: {
+                rules: [{
+                  condition: {
+                    maxWidth: 500
+                  },
+                  chartOptions: {
+                    legend: {
+                      layout: 'horizontal',
+                      align: 'center',
+                      verticalAlign: 'bottom'
+                    }
+                  }
+                }]
+              }
+            
+            });
+        </script>   
+        </div>
+        
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<!--Se Uso este parametro para activar sin resetear la pagina-->
+<script>
+  function Activar_script() {
+    $.ajax({
+        url: 'Activar_led',
+        success: function(data) {
+        }
+    });
+}
+</script>
+
+<script>
+  function Desactivar_script() {
+    $.ajax({
+        url: 'Desactivar_led',
+        success: function(data) {
+        }
+    });
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+
+{% extends 'layout.html' %}
+
+{% block titulo %} inicio {% endblock %}
+
+{% load static %}
+
+{% block contenido %} 
+{% load static %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" >
+            <img src="{% static 'images/gva.jpg' %}" width="90" height="90" class="d-inline-block align-top" alt="">    
+        </a>
+                
+        <div class=card-body>
+        <h2 class ="text- light"> G.V.A. Technology SAC </h1>
+        </div>
+        <!--Salida de la Aplicacion-->
+        
+        <a href="/ingresarT/" class ="btn btn-danger float-right" role="button" aria pressed="true">Ingresar</a> 
+    </nav> 
+    <div>
+    
+        <div>
+        <h1 class ="text- light"></h1>
+        </div>
+        
+        <div>
+        <h1 class ="text- light"> </h1>
+        </div>
+
+        <div>
+        <h1 class ="text- light"> </h1>
+        </div> 
+    </div> 
+{% endblock %}

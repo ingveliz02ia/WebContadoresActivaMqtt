@@ -1,0 +1,25 @@
+# Fuerza LF en todos los archivos de código
+*.py text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.html text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+
+# Archivos binarios que no deben tocarse
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.eot binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.pdf binary
+*.zip binary
+*.exe binary
+
+# Archivos de configuración de Django
+*.env text eol=lf

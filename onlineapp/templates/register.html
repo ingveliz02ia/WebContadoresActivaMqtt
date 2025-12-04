@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <title> Registrar </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon"
+            href="{% static 'images/Logo1234.png' %}">
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href= "{% static 'css/estilos.css' %}"/> 
+            
+        <!--reglas de estilo-->
+
+       
+    </head>
+    <body>
+        <div class="alert - success">
+            <strong>Bienvenido. </strong> Registrate - Ingresa al Sistema.
+        </div>
+        
+        {% if messages %}
+		    {% for message in messages %}
+		        <div class="notification {{ message.tags}}">
+			        {{ message }}
+		        </div>
+		    {% endfor %}
+	    {% endif %}
+
+       
+        <div class="login-page" >
+        <!-- Mensages-->   
+            {% if messages %}
+		         {% for message in messages %}
+                    <div class="notification {{ message.tags}}">
+                        {{ message }}
+                    </div>
+		     {% endfor %}
+	        {% endif %}
+        <!--  Fin de Mensajes -->
+            <div class="form">
+                <form class="register-form"  method="POST">
+                    {% csrf_token %} 
+                    {{form.as_p}}
+                    <button type="submit" id="submit">Registrarse</button>  
+                    <p class="message">¿Si ya estas registrado? <a href= "/ingresarT" >Ingresa</a></p> 
+                </form>
+            </div> 
+        </div>                  
+    </body>
+</html>
