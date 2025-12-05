@@ -102,6 +102,7 @@ USE_L10N = True
 USE_TZ = True
 
 #se agrega esta linea para agregar cambios
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AUTH_USER_MODEL = 'onlineapp.user_modificado'
 
