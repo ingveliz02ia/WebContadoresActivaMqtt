@@ -18,7 +18,7 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ["https://web-production-a1c54.up.railway.app"] # Uso esta linea cuando lo desplegue en ralway
+CSRF_TRUSTED_ORIGINS = ["https://web-monitoreo.up.railway.app"] # Uso esta linea cuando lo desplegue en ralway web-monitoreo.up.railway.app
 #ALLOWED_HOSTS = ['localhost','192.168.101.12','127.0.0.1']
 #ALLOWED_HOSTS = ['us-cdbr-east-06.cleardb.net']
 # Application definition
